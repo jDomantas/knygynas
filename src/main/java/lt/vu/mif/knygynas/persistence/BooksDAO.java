@@ -5,6 +5,7 @@ import lt.vu.mif.knygynas.entities.Book;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @ApplicationScoped
 public class BooksDAO {
@@ -16,10 +17,14 @@ public class BooksDAO {
     }
 
     public void save(Book book) {
-        this.em.persist(book);
+        em.persist(book);
     }
 
-    public void delete(Book book) {
-        em.remove(book);
+    public List<Book> loadAll() {
+        return em.createNamedQuery("Books.findAll", Book.class).getResultList();
+    }
+
+    public Book load(String isbn) {
+        return em.find(Book.class, isbn);
     }
 }

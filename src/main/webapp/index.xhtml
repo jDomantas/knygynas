@@ -4,20 +4,53 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 >
 <h:head/>
 <h:body>
     <h2>Authors:</h2>
-    <ol>
+    <ul>
         <ui:repeat value="#{authors.allAuthors}" var="author">
             <li><h:link value="#{author.name}" outcome="author?id=#{author.id}" /></li>
         </ui:repeat>
-    </ol>
+    </ul>
     <h:form>
         <h:inputText value="#{authors.newAuthor.name}" required="true">
             <c:validateLength minimum="1" maximum="50" />
         </h:inputText>
-        <h:commandButton value="Add new author" action="#{authors.createNewAuthor}" />
+        <h:commandButton value="Add author" action="#{authors.createNewAuthor}" />
+    </h:form>
+
+    <h2>Books:</h2>
+    <ul>
+        <ui:repeat value="#{books.allBooks}" var="book">
+            <li><h:link value="#{book.title}" outcome="book?isbn=#{book.isbn}" /></li>
+        </ui:repeat>
+    </ul>
+    <h:form>
+        <h:inputText p:placeholder="ISBN" value="#{books.newBook.isbn}" required="true">
+            <c:validateLength minimum="13" maximum="13" />
+        </h:inputText>
+        <h:inputText p:placeholder="Title" value="#{books.newBook.title}" required="true">
+            <c:validateLength minimum="1" maximum="100" />
+        </h:inputText>
+        <h:inputText p:placeholder="Publisher" value="#{books.newBook.publisher}" required="true">
+            <c:validateLength minimum="1" maximum="50" />
+        </h:inputText>
+        <h:commandButton value="Add book" action="#{books.createNewBook}" />
+    </h:form>
+
+    <h2>Publishers:</h2>
+    <ul>
+        <ui:repeat value="#{publishers.allPublishers}" var="pub">
+            <li><h:link value="#{pub.name}" outcome="publisher?id=#{pub.id}" /></li>
+        </ui:repeat>
+    </ul>
+    <h:form>
+        <h:inputText value="#{publishers.newPublisher.name}" required="true">
+            <c:validateLength minimum="1" maximum="50" />
+        </h:inputText>
+        <h:commandButton value="Add publisher" action="#{publishers.createNewPublisher}" />
     </h:form>
 </h:body>
 </html>

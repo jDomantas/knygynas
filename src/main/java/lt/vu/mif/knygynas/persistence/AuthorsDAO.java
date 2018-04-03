@@ -27,4 +27,17 @@ public class AuthorsDAO {
     public Author load(Integer id) {
         return em.find(Author.class, id);
     }
+
+    public Author findByName(String name) {
+        List<Author> authors = em
+                .createNamedQuery("Author.findByName", Author.class)
+                .setParameter("name", name)
+                .setMaxResults(1)
+                .getResultList();
+        if (authors.size() > 0) {
+            return authors.get(0);
+        } else {
+            return null;
+        }
+    }
 }

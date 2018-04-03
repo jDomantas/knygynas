@@ -1,7 +1,7 @@
 package lt.vu.mif.knygynas.usecases;
 
-import lt.vu.mif.knygynas.entities.Author;
-import lt.vu.mif.knygynas.persistence.AuthorsDAO;
+import lt.vu.mif.knygynas.entities.Publisher;
+import lt.vu.mif.knygynas.persistence.PublishersDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -10,27 +10,27 @@ import javax.inject.Inject;
 import java.util.Map;
 
 @Model
-public class BooksByAuthor {
+public class BooksByPublisher {
     @Inject
-    private AuthorsDAO authorsDAO;
+    private PublishersDAO publishersDAO;
 
-    private Author author;
+    private Publisher publisher;
 
     @PostConstruct
     public void init() {
-        this.loadAuthor();
+        this.loadPublisher();
     }
 
-    private void loadAuthor() {
+    private void loadPublisher() {
         Map<String, String> params = FacesContext
                 .getCurrentInstance()
                 .getExternalContext()
                 .getRequestParameterMap();
         Integer id = Integer.parseInt(params.get("id"));
-        this.author = authorsDAO.load(id);
+        this.publisher = publishersDAO.load(id);
     }
 
-    public Author getAuthor() {
-        return author;
+    public Publisher getPublisher() {
+        return publisher;
     }
 }

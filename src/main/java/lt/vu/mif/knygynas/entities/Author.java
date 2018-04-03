@@ -3,13 +3,13 @@ package lt.vu.mif.knygynas.entities;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Author.findAll", query = "select a from Author as a"),
+    @NamedQuery(name = "Author.findByName", query = "select a from Author as a where a.name = :name"),
 })
 @Table(name = "AUTHOR")
 public class Author implements Serializable {
@@ -27,7 +27,11 @@ public class Author implements Serializable {
     @Column(name = "NAME")
     private String name;
 
-    @OneToMany(mappedBy = "author")
+    @ManyToMany
+    @JoinTable(
+            name="AUTHORS_BOOKS",
+            joinColumns=@JoinColumn(name="AUTHOR_ID", referencedColumnName="ID"),
+            inverseJoinColumns=@JoinColumn(name="BOOK_ID", referencedColumnName="ISBN"))
     private List<Book> books;
 
     @Override
