@@ -2,13 +2,14 @@ package lt.vu.mif.knygynas.persistence;
 import lt.vu.mif.knygynas.entities.Author;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @ApplicationScoped
 public class AuthorsDAO {
-    @PersistenceContext
+    @Inject
     private EntityManager em;
 
     public List<Author> loadAll() {
@@ -21,5 +22,9 @@ public class AuthorsDAO {
 
     public void save(Author author) {
         this.em.persist(author);
+    }
+
+    public Author load(Integer id) {
+        return em.find(Author.class, id);
     }
 }
