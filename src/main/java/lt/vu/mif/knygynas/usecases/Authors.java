@@ -5,7 +5,9 @@ import lt.vu.mif.knygynas.persistence.AuthorsDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;

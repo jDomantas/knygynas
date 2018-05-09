@@ -12,10 +12,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.Map;
 
-@Model
-public class AuthorInfo {
+@RequestScoped
+@Named
+public class AuthorInfo implements Serializable {
     @Inject
     private AuthorsDAO authorsDAO;
 
@@ -43,6 +45,10 @@ public class AuthorInfo {
         } catch (OptimisticLockException e) {
             return "author?faces-redirect=true&id=" + author.getId() + "&error=optimistic-lock-exception";
         }
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public Author getAuthor() {
