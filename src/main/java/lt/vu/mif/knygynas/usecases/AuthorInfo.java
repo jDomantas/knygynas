@@ -4,9 +4,7 @@ import lt.vu.mif.knygynas.entities.Author;
 import lt.vu.mif.knygynas.persistence.AuthorsDAO;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,7 +13,7 @@ import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Map;
 
-@RequestScoped
+@ViewScoped
 @Named
 public class AuthorInfo implements Serializable {
     @Inject
