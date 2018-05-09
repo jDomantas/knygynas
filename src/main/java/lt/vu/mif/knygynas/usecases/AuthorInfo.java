@@ -5,12 +5,17 @@ import lt.vu.mif.knygynas.persistence.AuthorsDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.OptimisticLockException;
+import javax.transaction.Transactional;
 import java.util.Map;
 
 @Model
-public class BooksByAuthor {
+public class AuthorInfo {
     @Inject
     private AuthorsDAO authorsDAO;
 
@@ -28,6 +33,16 @@ public class BooksByAuthor {
                 .getRequestParameterMap();
         Integer id = Integer.parseInt(params.get("id"));
         this.author = authorsDAO.load(id);
+    }
+
+    @Transactional
+    public String updateName() {
+        try {
+            authorsDAO.update(author);
+            return "author?faces-redirect=true&id=" + author.getId();
+        } catch (OptimisticLockException e) {
+            return "author?faces-redirect=true&id=" + author.getId() + "&error=optimistic-lock-exception";
+        }
     }
 
     public Author getAuthor() {

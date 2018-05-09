@@ -40,4 +40,8 @@ public class AuthorsDAO {
             return null;
         }
     }
+
+    public Author update(Author author) {
+        return em.merge(author);
+    }
 }

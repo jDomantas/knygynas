@@ -34,6 +34,10 @@ public class Author implements Serializable {
             inverseJoinColumns=@JoinColumn(name="BOOK_ID", referencedColumnName="ISBN"))
     private List<Book> books;
 
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
