@@ -22,6 +22,12 @@
         </h:commandButton>
         <h:outputText value="Name was already modified by other user" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
     </h:form>
+    <h:form>
+        <h:outputText value="#{generateName.nameGenerationStatus}" />
+        <h:commandButton value="Suggest a new name " disabled="#{generateName.nameGenerationRunning}" action="#{generateName.generateNewName()}">
+            <f:param name="id" value="#{authorInfo.author.id}" />
+        </h:commandButton>
+    </h:form>
     <h:link value="Back to main page" outcome="index" />
 </h:body>
 </html>
