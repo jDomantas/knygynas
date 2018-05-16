@@ -1,6 +1,7 @@
 package lt.vu.mif.knygynas.usecases;
 
 import lt.vu.mif.knygynas.entities.Author;
+import lt.vu.mif.knygynas.interceptors.LoggedInvocation;
 import lt.vu.mif.knygynas.persistence.AuthorsDAO;
 
 import javax.annotation.PostConstruct;
@@ -36,6 +37,7 @@ public class AuthorInfo implements Serializable {
     }
 
     @Transactional
+    @LoggedInvocation
     public String updateName() {
         try {
             authorsDAO.update(author);
