@@ -13,7 +13,7 @@ import java.util.concurrent.Future;
 public class GeneratorWithWord implements NameGenerator {
     private static Random random = new Random();
 
-    private static String[] words = new String[] { "foo", "bar", "baz" };
+    protected String[] words = new String[] { "foo", "bar", "baz" };
 
     @Futureable
     public Future<String> generateNickname() {
