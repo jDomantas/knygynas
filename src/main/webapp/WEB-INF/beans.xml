@@ -9,4 +9,7 @@
     <interceptors>
         <class>lt.vu.mif.knygynas.interceptors.MethodLogger</class>
     </interceptors>
+    <alternatives>
+        <class>lt.vu.mif.knygynas.services.GeneratorWithWord</class>
+    </alternatives>
 </beans>
